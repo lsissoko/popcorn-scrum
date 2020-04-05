@@ -4,9 +4,9 @@ let speakers = []
 const logRemaining = () => {
   console.log('\nremaining speakers:')
 
-  // Iterating with Object.keys() because the array length never changes (the final array is [ <x empty items> ])
+  // Iterating this way because the length never changes (the final array is [ <x empty items> ])
   Object.keys(speakers).forEach(idx => {
-    console.log(`${idx} - ${speakers[idx]}`)
+    console.log(`${idx}) ${speakers[idx]}`)
   })
 }
 
@@ -15,16 +15,24 @@ const loop = (reader) => {
     console.log('everyone has spoken! goodbye')
     return reader.close()
   }
-  reader.question('\n\n\n> next speaker ("exit" to quit): ', (input) => {
+
+  reader.question('\n\n> next speaker ("exit" to quit): ', (input) => {
     input = input.replace(/\s/g, '').toLowerCase()
+
+    const idx = parseInt(input)
+
     if (input === 'exit') {
       return reader.close()
-    } else if (Number.isInteger(parseInt(input))) {
-      const idx = parseInt(input)
-      console.log(`${speakers[idx].toUpperCase()} has spoken!`)
-      delete speakers[idx]
+    } else if (Number.isInteger(idx)) {
+      if (speakers[idx]) {
+        console.log(`${speakers[idx].toUpperCase()} has spoken!`)
+        delete speakers[idx]
+      } else {
+        console.log('invalid input!')
+      }
       logRemaining()
     }
+
     loop(reader)
   })
 }
