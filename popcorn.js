@@ -1,6 +1,8 @@
 const fs = require('fs')
 let speakers = []
 
+const filepath = process.argv[2] || require('./conf.js').default_names
+
 const logRemaining = () => {
   console.log('\nremaining speakers:')
 
@@ -37,7 +39,7 @@ const loop = (reader) => {
   })
 }
 
-fs.readFile('./names.txt', (err, data) => {
+fs.readFile(filepath, (err, data) => {
   if (err) {
     console.error(err)
     return
