@@ -17,7 +17,7 @@ node popcorn.js <filepath>  # given file (maybe you juggle teams)
 
 ## Creating a default file
 - create a `data` directory and add a file with your names on separate lines
-- create a `conf.js` file and paste the following (replacing `<filename>` with your chosen default file):
+- create a `conf.js` file and paste the following (replacing `<filename>` with your file):
 ```
 module.exports = {
   default_names: 'data/<filename>'
